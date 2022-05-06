@@ -1,0 +1,6 @@
+.form-inline {
+  display: flex;
+}
+.form-group {
+  margin: 5px;
+}
