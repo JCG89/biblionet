@@ -18,6 +18,35 @@ const AddBooks = ({ libraryData, addBook }) => {
     //Vidange du input
     setNewData(initialState);
   };
+  const displayData =
+    libraryData.length > 0 ? (
+      libraryData.map((data) => {
+        return (
+          <>
+            <li className="list-group-item list-group-item-light d-flex justify-content-between ">
+              <span>
+                <strong>Auteur: </strong>
+                {data.auteur}
+              </span>
+
+              <span>
+                <strong>Titre: </strong>
+                {data.titre}
+              </span>
+              <span className="btn btn-danger">X</span>
+            </li>
+          </>
+        );
+      })
+    ) : (
+      <p className="text-center">Aucune donée disponible</p>
+    );
+
+  const deleteAllData = libraryData.length > 0 && (
+    <div className="d-flex justify-content-center">
+      <button className="btn btn-danger mt-4">Effacer tous les livres</button>
+    </div>
+  );
 
   return (
     <main role="main">
@@ -68,16 +97,8 @@ const AddBooks = ({ libraryData, addBook }) => {
       >
         <div className="row">
           <div className="col-md-12">
-            <ul className="list-group">
-              <li className="list-group-item list-group-item-light d-flex justify-content-between ">
-                Livres enrégistrés
-              </li>
-            </ul>
-            <div className="d-flex justify-content-center">
-              <button className="btn btn-danger mt-4">
-                Effacer tous les livres
-              </button>
-            </div>
+            <ul className="list-group">{displayData}</ul>
+            {deleteAllData}
           </div>
         </div>
       </div>
