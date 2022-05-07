@@ -1,17 +1,22 @@
-import { ADD_BOOKS, DELETE_BOOKS } from "../constants";
+import { ADD_BOOK, DELETE_BOOK, DELETE_All } from "../constants";
 
 export const addBook = (data) => {
   return {
-    type: ADD_BOOKS,
+    type: ADD_BOOK,
     payload: data /*objet ( const initialState = {
       titre: "",
       auteur: "",
     };)*/,
   };
 };
-export const deleteBooks = (id) => {
+export const deleteBook = (id) => {
   return {
-    type: DELETE_BOOKS,
+    type: DELETE_BOOK,
     payload: id,
+  };
+};
+export const deleteAll = () => {
+  return {
+    type: DELETE_All,
   };
 };

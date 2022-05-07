@@ -2,11 +2,11 @@ import React from "react";
 import "./AddBooks.css";
 import { useState } from "react";
 import { connect } from "react-redux";
-import { addBook, deleteBooks } from "../redux/actions/actionsBooks";
+import { addBook, deleteBook, deleteAll } from "../redux/actions/actionsBooks";
 import { v4 as uuidv4 } from "uuid";
 import FlipMove from "react-flip-move";
 
-const AddBooks = ({ libraryData, addBook, deleteBook }) => {
+const AddBooks = ({ libraryData, addBook, deleteBook, deleteAll }) => {
   console.log(libraryData);
   const initialState = {
     titre: "",
@@ -55,7 +55,9 @@ const AddBooks = ({ libraryData, addBook, deleteBook }) => {
 
   const deleteAllData = libraryData.length > 0 && (
     <div className="d-flex justify-content-center">
-      <button className="btn btn-danger mt-4">Effacer tous les livres</button>
+      <button className="btn btn-danger mt-4" onClick={() => deleteAll()}>
+        Effacer tous les livres
+      </button>
     </div>
   );
 
@@ -124,7 +126,8 @@ const addStateToProps = (state) => {
 const addDispatchToProps = (dispatch) => {
   return {
     addBook: (data) => dispatch(addBook(data)),
-    deleteBook: (id) => dispatch(deleteBooks(id)),
+    deleteBook: (id) => dispatch(deleteBook(id)),
+    deleteAll: () => dispatch(deleteAll()),
   };
 };
 
