@@ -2,13 +2,16 @@ import React from "react";
 import "./AddBooks.css";
 import { useState } from "react";
 import { connect } from "react-redux";
-import { addBook } from "../redux/actions/actionsBooks";
+import { addBook, deleteBooks } from "../redux/actions/actionsBooks";
+import { v4 as uuidv4 } from "uuid";
+import FlipMove from "react-flip-move";
 
-const AddBooks = ({ libraryData, addBook }) => {
+const AddBooks = ({ libraryData, addBook, deleteBook }) => {
   console.log(libraryData);
   const initialState = {
     titre: "",
     auteur: "",
+    id: uuidv4(),
   };
   const [newData, setNewData] = useState(initialState);
 
@@ -20,10 +23,13 @@ const AddBooks = ({ libraryData, addBook }) => {
   };
   const displayData =
     libraryData.length > 0 ? (
-      libraryData.map((data) => {
-        return (
-          <>
-            <li className="list-group-item list-group-item-light d-flex justify-content-between ">
+      <FlipMove>
+        {libraryData.map((data) => {
+          return (
+            <li
+              key={data.id}
+              className="list-group-item list-group-item-light d-flex justify-content-between "
+            >
               <span>
                 <strong>Auteur: </strong>
                 {data.auteur}
@@ -33,11 +39,16 @@ const AddBooks = ({ libraryData, addBook }) => {
                 <strong>Titre: </strong>
                 {data.titre}
               </span>
-              <span className="btn btn-danger">X</span>
+              <span
+                className="btn btn-danger"
+                onClick={() => deleteBook(data.id)}
+              >
+                X
+              </span>
             </li>
-          </>
-        );
-      })
+          );
+        })}
+      </FlipMove>
     ) : (
       <p className="text-center">Aucune donée disponible</p>
     );
@@ -113,6 +124,7 @@ const addStateToProps = (state) => {
 const addDispatchToProps = (dispatch) => {
   return {
     addBook: (data) => dispatch(addBook(data)),
+    deleteBook: (id) => dispatch(deleteBooks(id)),
   };
 };
 

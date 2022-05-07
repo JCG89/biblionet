@@ -1,4 +1,4 @@
-import { ADD_BOOKS } from "../constants";
+import { ADD_BOOKS, DELETE_BOOKS } from "../constants";
 import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
@@ -10,6 +10,11 @@ const helperData = (action) => {
     titre: action.payload.titre,
     auteur: action.payload.auteur,
   };
+};
+const removeBook = (state, id) => {
+  const books = state.filter((book) => book.id !== id);
+
+  return books;
 };
 
 //reducers
@@ -23,6 +28,12 @@ const booksReducers = (state = initialState.books, action) => {
       state = [...state, helperData(action)];
       // enrigistrement dans localStorage
       localStorage.setItem("booksData", JSON.stringify(state));
+      return state;
+
+    case DELETE_BOOKS:
+      state = removeBook(state, action.payload);
+      localStorage.setItem("booksData", JSON.stringify(state));
+
       return state;
 
     default:
