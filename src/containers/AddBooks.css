@@ -1,6 +1,12 @@
 .form-inline {
   display: flex;
+  bottom: 5px;
 }
 .form-group {
   margin: 5px;
+}
+.jumbotron {
+  background: gainsboro;
+  justify-content: space-around;
+  margin-bottom: 5px;
 }
