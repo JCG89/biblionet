@@ -106,7 +106,7 @@ const AddBooks = ({ libraryData, addBook, deleteBook, deleteAll }) => {
       </div>
       <div
         className="container"
-        style={{ minHeight: "200px", marginTop: "50px" }}
+        style={{ minHeight: "200px", marginTop: "auto" }}
       >
         <div className="row">
           <div className="col-md-12">

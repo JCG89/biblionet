@@ -1,0 +1,8 @@
+.nav {
+  margin-left: auto;
+  list-style-type: none;
+}
+.item {
+  color: #fff;
+  margin: 15px;
+}
